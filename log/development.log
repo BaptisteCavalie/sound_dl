@@ -1,0 +1,649 @@
+
+
+Started GET "/" for ::1 at 2016-01-29 10:52:58 +0100
+
+ActiveRecord::PendingMigrationError - 
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+:
+  activerecord (4.2.5.1) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.5.1) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5.1) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/7657789cae72d97e/variables" for ::1 at 2016-01-29 10:52:58 +0100
+  [1m[36m (1.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.5ms)[0m  select sqlite_version(*)
+  [1m[36m (1.3ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateArtists (20160127132656)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "artists" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "full_name" varchar NOT NULL, "soundcloud_id" integer NOT NULL, "avatar_url" varchar, "permalink_url" varchar, "track_count" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160127132656"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to CreateTracks (20160127132936)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "tracks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar NOT NULL, "stream_url" varchar NOT NULL, "artist_id" integer NOT NULL, "duration" integer, "artwork_url" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160127132936"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to AddDescriptionToArtist (20160128102018)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "artists" ADD "description" text
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160128102018"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for ::1 at 2016-01-29 10:53:47 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArtistsController#search as HTML
+  Rendered artists/search.html.erb within layouts/application (1.8ms)
+  Rendered shared/_flashes.html.erb (0.7ms)
+  Rendered shared/_navbar.html.erb (7.3ms)
+Completed 200 OK in 3754ms (Views: 3745.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-c58affb3719d681ca648f4a53db1a0e42adf8c48fdf6995d974f50a66f8a407e.css?body=1" for ::1 at 2016-01-29 10:53:51 +0100
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-29 10:53:51 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-29 10:53:51 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-01-29 10:53:51 +0100
+
+
+Started GET "/assets/logo-d8742710379beebf040ccd0c037fdc52498a93ff32e7c1996f9ef71f8e6f3825.png" for ::1 at 2016-01-29 10:53:51 +0100
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-01-29 10:53:51 +0100
+
+
+Started GET "/artists?utf8=%E2%9C%93&artist_name=kanye+west&commit=Recherchez+%21" for ::1 at 2016-01-29 10:53:58 +0100
+Processing by ArtistsController#index as HTML
+  Parameters: {"utf8"=>"✓", "artist_name"=>"kanye west", "commit"=>"Recherchez !"}
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "artists" WHERE (LOWER(full_name) LIKE '%kanye west%' OR LOWER(description) LIKE '%kanye west%')
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "artists" ("full_name", "soundcloud_id", "avatar_url", "permalink_url", "track_count", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["full_name", "Kanye West"], ["soundcloud_id", 174006135], ["avatar_url", "https://i1.sndcdn.com/avatars-000199730696-dhsj0p-large.jpg"], ["permalink_url", "http://soundcloud.com/kanyewest"], ["track_count", 7], ["created_at", "2016-01-29 09:54:02.864736"], ["updated_at", "2016-01-29 09:54:02.864736"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "artists" ("full_name", "soundcloud_id", "description", "avatar_url", "permalink_url", "track_count", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["full_name", "Kanye West - SWISH"], ["soundcloud_id", 160533630], ["description", "Kanye West - SWISH\nKanye West - SWISH Album"], ["avatar_url", "https://i1.sndcdn.com/avatars-000198161942-nh5ae4-large.jpg"], ["permalink_url", "http://soundcloud.com/meek-mill-dwmtm-album"], ["track_count", 0], ["created_at", "2016-01-29 09:54:02.871374"], ["updated_at", "2016-01-29 09:54:02.871374"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "artists" ("full_name", "soundcloud_id", "description", "avatar_url", "permalink_url", "track_count", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["full_name", "Kanye West - Yeezus"], ["soundcloud_id", 39898921], ["description", ""], ["avatar_url", "https://i1.sndcdn.com/avatars-000044820589-mu6aa3-large.jpg"], ["permalink_url", "http://soundcloud.com/yeezusthealbum"], ["track_count", 0], ["created_at", "2016-01-29 09:54:02.874165"], ["updated_at", "2016-01-29 09:54:02.874165"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "artists" ("full_name", "soundcloud_id", "description", "avatar_url", "permalink_url", "track_count", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["full_name", "Kanye West - SWISH"], ["soundcloud_id", 12516111], ["description", "contact: kidkito25@gmail.com\nKB\nNBHD $kum\nEB.73 \nJuicy \nSuri \nGnB Finessto \nNC \nCocoa (Producer)"], ["avatar_url", "https://i1.sndcdn.com/avatars-000200678923-ld3ehi-large.jpg"], ["permalink_url", "http://soundcloud.com/lil-kb"], ["track_count", 27], ["created_at", "2016-01-29 09:54:02.877132"], ["updated_at", "2016-01-29 09:54:02.877132"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "artists" ("full_name", "soundcloud_id", "description", "avatar_url", "permalink_url", "track_count", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["full_name", "Hip Hop Xclusive"], ["soundcloud_id", 145333862], ["description", "All Exclusive Hip Hop/R&B\n\n★★ Need A Song Repost Or Spotlight Placement? Inbox Us For Details ★★"], ["avatar_url", "https://i1.sndcdn.com/avatars-000199831325-aiv9f6-large.jpg"], ["permalink_url", "http://soundcloud.com/hiphopxclusive"], ["track_count", 6], ["created_at", "2016-01-29 09:54:02.879695"], ["updated_at", "2016-01-29 09:54:02.879695"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "artists" ("full_name", "soundcloud_id", "description", "avatar_url", "permalink_url", "track_count", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["full_name", "KANYE WEST _ DJ GOOSE"], ["soundcloud_id", 21841403], ["description", ""], ["avatar_url", "https://i1.sndcdn.com/avatars-000023415227-onszv4-large.jpg"], ["permalink_url", "http://soundcloud.com/kanye-west-dj-goose"], ["track_count", 9], ["created_at", "2016-01-29 09:54:02.882138"], ["updated_at", "2016-01-29 09:54:02.882138"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "artists" ("full_name", "soundcloud_id", "description", "avatar_url", "permalink_url", "track_count", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["full_name", "Bedroomtrap™"], ["soundcloud_id", 10908301], ["description", "Email us or message us with promo inquiries\nJennifer @ Bedroomtrap.com\nLIKE OUR FACBOOK PLZ! http://goo.gl/JmtE5Y\nFollow the team @BAEGOD @SBVCE @YUNGBREHH\n\nGrab the \"I Love God and Trap Music\" T-Shirts as well as bedroomtrap and bae god merch here www.baegod.bigcartel.com\n\nMade in the Bedroom or made for the Bedroom; Bedroom Producers, slow grind music trapsoul r&b turn up traxx  and everything in between or this is where it's at!\n"], ["avatar_url", "https://i1.sndcdn.com/avatars-000200252128-l0kmoj-large.jpg"], ["permalink_url", "http://soundcloud.com/bedroomtrap"], ["track_count", 24], ["created_at", "2016-01-29 09:54:02.884442"], ["updated_at", "2016-01-29 09:54:02.884442"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "artists" ("full_name", "soundcloud_id", "avatar_url", "permalink_url", "track_count", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["full_name", "Kanye [ West ]"], ["soundcloud_id", 26819115], ["avatar_url", "https://i1.sndcdn.com/avatars-000025131122-1ps0rq-large.jpg"], ["permalink_url", "http://soundcloud.com/kanye-west-4"], ["track_count", 0], ["created_at", "2016-01-29 09:54:02.886591"], ["updated_at", "2016-01-29 09:54:02.886591"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "artists" ("full_name", "soundcloud_id", "description", "avatar_url", "permalink_url", "track_count", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["full_name", "Wiz Khalifa Bake Sale"], ["soundcloud_id", 184019350], ["description", "Fetty Wap - Jugg\nKevin Gates - Really Really\n50 Cent - I'm The Man ft. Sonny Digital\nMiguel & PARTYNEXTDOOR - Girl With The Tattoo / Break From Toronto\nWiz Khalifa - Cabin Fever 3\nDrake ~ Back To Back Freestyle\nRihanna -  Bitch Better Have My Money\nBryson Tiller - Exchange\nMigos - Pipe It Up\nDuke Dumont - Need U (100%) (Jauz X Marshmello Remix)\nSnoop Dogg - I'm From Long Beach\nFetty Wap - Trap Queen\nA$AP Ferg - New Level Feat. Future\nPusha T - M.P.A. Feat. Kanye West, ASAP Rocky & The-Dream (Prod. By J. Cole)\nThe Weeknd & Future - Low Life\nSkrillex - Stranger (Skrillex Remix With Tennyson & White Sea)\nYoung Thug - Make A Lot (prod. Metro Boomin)\nJOYRYDE Ft. RICK RO$$ - WINDOWS\nWale - POWERBALL Freestyle\n\nJimmy Choo - Fetty Wap  The Game Do It To You Flatbush ZOMBiES Glorious Thugs Bones - RestInPeace Future - Purple Reign\nKanye West REAL FRIENDS & NO MORE PARTIES IN LA Azizi Gibson - Dj Khaled Keke Palmer - I Don't Belong To You\nTapia Ft Fetty Wap - Fuss & Fight DJ Mustard FT. Travis Scott - Whole Lotta Lovin SMASH MOUTH Under Pressure Wale - POWERBALL F\nYamborghini High - ASAP Rocky (Ft. ASAP Nast & ASAP Ferg)\nPeeWee LongWay - Jackie Tan Ft. Wiz Khalifa & Juicy J\nIsaiah Rashad - Smile\nDrake- \"3 Peat\" ft. Chief Keef\nMeek Mill - 4/4 (Mitape)\nChris Brown - Who's Gonna (Nobody) Remix (Ft Keith Sweat)\nMIGOS - YRN 2 Young Rich Niggas 2\nLil Boosie - Cancer\nYoung Thug - Serious\nWiz Khalifa – Khalifa\nYoung Thug - Power\ntwenty one pilots: Stressed Out\nMacklemore & Ryan Lewis - White Privilege II Feat. Jamila Woods\nLee Seung Gi (이승기) - (나 군대 간다) I'm Going to the Military\nSoulja Boy - Stephen Curry\nJ.U.S.T.I.C.E. League - J.U.S.T.I.C.E. For All"], ["avatar_url", "https://i1.sndcdn.com/avatars-000200768698-k5k6gf-large.jpg"], ["permalink_url", "http://soundcloud.com/hot_new_hip_hop"], ["track_count", 1], ["created_at", "2016-01-29 09:54:02.888839"], ["updated_at", "2016-01-29 09:54:02.888839"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "artists" ("full_name", "soundcloud_id", "description", "avatar_url", "permalink_url", "track_count", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["full_name", "J.U.S.T.I.C.E. League"], ["soundcloud_id", 200404945], ["description", "Pusha T X Chris Brown - MFTR"], ["avatar_url", "https://i1.sndcdn.com/avatars-000201127779-h64bto-large.jpg"], ["permalink_url", "http://soundcloud.com/midwestleakers10"], ["track_count", 25], ["created_at", "2016-01-29 09:54:02.891056"], ["updated_at", "2016-01-29 09:54:02.891056"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  Rendered artists/index.html.erb within layouts/application (2.2ms)
+  Rendered shared/_flashes.html.erb (0.1ms)
+  Rendered shared/_navbar.html.erb (1.1ms)
+Completed 200 OK in 4815ms (Views: 29.9ms | ActiveRecord: 11.0ms)
+
+
+Started GET "/artists/1" for ::1 at 2016-01-29 10:54:08 +0100
+
+AbstractController::ActionNotFound - The action 'show' could not be found for ArtistsController:
+  actionpack (4.2.5.1) lib/abstract_controller/base.rb:132:in `process'
+  actionview (4.2.5.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:815:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.5.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.5.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.5.1) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5.1) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started GET "/artists/1" for ::1 at 2016-01-29 10:54:08 +0100
+
+AbstractController::ActionNotFound - The action 'show' could not be found for ArtistsController:
+  actionpack (4.2.5.1) lib/abstract_controller/base.rb:132:in `process'
+  actionview (4.2.5.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:815:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.5.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.5.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.5.1) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5.1) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/657d7dcb79931351/variables" for ::1 at 2016-01-29 10:54:09 +0100
+
+
+Started GET "/artists?utf8=%E2%9C%93&artist_name=kanye+west&commit=Recherchez+%21" for ::1 at 2016-01-29 10:54:15 +0100
+Processing by ArtistsController#index as HTML
+  Parameters: {"utf8"=>"✓", "artist_name"=>"kanye west", "commit"=>"Recherchez !"}
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "artists" WHERE (LOWER(full_name) LIKE '%kanye west%' OR LOWER(description) LIKE '%kanye west%')[0m
+  [1m[35mArtist Load (0.2ms)[0m  SELECT "artists".* FROM "artists" WHERE (LOWER(full_name) LIKE '%kanye west%' OR LOWER(description) LIKE '%kanye west%')
+  Rendered artists/index.html.erb within layouts/application (0.6ms)
+  Rendered shared/_flashes.html.erb (0.1ms)
+  Rendered shared/_navbar.html.erb (1.0ms)
+Completed 200 OK in 28ms (Views: 26.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/artists/1" for ::1 at 2016-01-29 10:54:25 +0100
+
+AbstractController::ActionNotFound - The action 'show' could not be found for ArtistsController:
+  actionpack (4.2.5.1) lib/abstract_controller/base.rb:132:in `process'
+  actionview (4.2.5.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:815:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.5.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.5.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.5.1) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5.1) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/6965c465effefdfa/variables" for ::1 at 2016-01-29 10:54:25 +0100
+
+
+Started GET "/artists/1" for ::1 at 2016-01-29 11:07:27 +0100
+
+AbstractController::ActionNotFound - The action 'show' could not be found for ArtistsController:
+  actionpack (4.2.5.1) lib/abstract_controller/base.rb:132:in `process'
+  actionview (4.2.5.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:815:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.5.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.5.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.5.1) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5.1) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/d0487a7e65f82c0e/variables" for ::1 at 2016-01-29 11:07:27 +0100
+
+
+Started GET "/" for ::1 at 2016-01-29 11:07:30 +0100
+Processing by ArtistsController#search as HTML
+  Rendered artists/search.html.erb within layouts/application (0.3ms)
+  Rendered shared/_flashes.html.erb (0.1ms)
+  Rendered shared/_navbar.html.erb (1.8ms)
+Completed 200 OK in 29ms (Views: 28.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-c58affb3719d681ca648f4a53db1a0e42adf8c48fdf6995d974f50a66f8a407e.css?body=1" for ::1 at 2016-01-29 11:07:30 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" for ::1 at 2016-01-29 11:07:30 +0100
+
+
+Started GET "/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" for ::1 at 2016-01-29 11:07:30 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2016-01-29 11:07:30 +0100
+
+
+Started GET "/assets/logo-d8742710379beebf040ccd0c037fdc52498a93ff32e7c1996f9ef71f8e6f3825.png" for ::1 at 2016-01-29 11:07:30 +0100
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-01-29 11:07:30 +0100
+
+
+Started GET "/artists?utf8=%E2%9C%93&artist_name=KANYE&commit=Recherchez+%21" for ::1 at 2016-01-29 11:07:39 +0100
+Processing by ArtistsController#index as HTML
+  Parameters: {"utf8"=>"✓", "artist_name"=>"KANYE", "commit"=>"Recherchez !"}
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "artists" WHERE (LOWER(full_name) LIKE '%kanye%' OR LOWER(description) LIKE '%kanye%')[0m
+  [1m[35mArtist Load (0.3ms)[0m  SELECT "artists".* FROM "artists" WHERE (LOWER(full_name) LIKE '%kanye%' OR LOWER(description) LIKE '%kanye%')
+  Rendered artists/index.html.erb within layouts/application (0.8ms)
+  Rendered shared/_flashes.html.erb (0.1ms)
+  Rendered shared/_navbar.html.erb (0.9ms)
+Completed 200 OK in 27ms (Views: 25.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/artists/1" for ::1 at 2016-01-29 11:07:41 +0100
+
+AbstractController::ActionNotFound - The action 'show' could not be found for ArtistsController:
+  actionpack (4.2.5.1) lib/abstract_controller/base.rb:132:in `process'
+  actionview (4.2.5.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:815:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.5.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.5.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.5.1) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5.1) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started GET "/artists/1" for ::1 at 2016-01-29 11:07:41 +0100
+
+AbstractController::ActionNotFound - The action 'show' could not be found for ArtistsController:
+  actionpack (4.2.5.1) lib/abstract_controller/base.rb:132:in `process'
+  actionview (4.2.5.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.5.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.5.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.5.1) lib/action_dispatch/routing/route_set.rb:815:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.5.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.5.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.5.1) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.5.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5.1) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.5.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5.1) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /Users/baptiste/.rbenv/versions/2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/e5338bcca58dd800/variables" for ::1 at 2016-01-29 11:07:41 +0100
+
+
+Started GET "/" for ::1 at 2016-01-29 11:34:38 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArtistsController#search as HTML
+  Rendered artists/search.html.erb within layouts/application (2.1ms)
+  Rendered shared/_flashes.html.erb (0.6ms)
+  Rendered shared/_navbar.html.erb (7.4ms)
+Completed 200 OK in 248ms (Views: 238.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/artists?utf8=%E2%9C%93&artist_name=kanye+west&commit=Recherchez+%21" for ::1 at 2016-01-29 11:34:56 +0100
+Processing by ArtistsController#index as HTML
+  Parameters: {"utf8"=>"✓", "artist_name"=>"kanye west", "commit"=>"Recherchez !"}
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "artists" WHERE (LOWER(full_name) LIKE '%kanye west%' OR LOWER(description) LIKE '%kanye west%')
+  [1m[36mArtist Load (0.1ms)[0m  [1mSELECT "artists".* FROM "artists" WHERE (LOWER(full_name) LIKE '%kanye west%' OR LOWER(description) LIKE '%kanye west%')[0m
+  Rendered artists/index.html.erb within layouts/application (1.2ms)
+  Rendered shared/_flashes.html.erb (0.1ms)
+  Rendered shared/_navbar.html.erb (0.9ms)
+Completed 200 OK in 32ms (Views: 19.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/artists/1" for ::1 at 2016-01-29 11:34:57 +0100
+Processing by ArtistsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mArtist Load (0.2ms)[0m  SELECT  "artists".* FROM "artists" WHERE "artists"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTrack Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "tracks" WHERE "tracks"."artist_id" = ? LIMIT 1[0m  [["artist_id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "tracks" ("title", "stream_url", "duration", "artwork_url", "artist_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "NO MORE PARTIES IN L.A. FEAT. KENDRICK LAMAR (CLEAN)"], ["stream_url", "https://api.soundcloud.com/tracks/242543650/stream"], ["duration", 377765], ["artwork_url", "https://i1.sndcdn.com/artworks-000143601686-0x3msz-large.jpg"], ["artist_id", 1], ["created_at", "2016-01-29 10:35:00.546510"], ["updated_at", "2016-01-29 10:35:00.546510"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tracks" ("title", "stream_url", "duration", "artwork_url", "artist_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["title", "NO MORE PARTIES IN L.A. FEAT. KENDRICK LAMAR"], ["stream_url", "https://api.soundcloud.com/tracks/242539038/stream"], ["duration", 375205], ["artwork_url", "https://i1.sndcdn.com/artworks-000143597723-28pt9g-large.jpg"], ["artist_id", 1], ["created_at", "2016-01-29 10:35:00.551245"], ["updated_at", "2016-01-29 10:35:00.551245"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tracks" ("title", "stream_url", "duration", "artwork_url", "artist_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "REAL FRIENDS"], ["stream_url", "https://api.soundcloud.com/tracks/241018700/stream"], ["duration", 252366], ["artwork_url", "https://i1.sndcdn.com/artworks-000142365006-6rjdnz-large.jpg"], ["artist_id", 1], ["created_at", "2016-01-29 10:35:00.553589"], ["updated_at", "2016-01-29 10:35:00.553589"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tracks" ("title", "stream_url", "duration", "artwork_url", "artist_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["title", "FACTS (CLEAN)"], ["stream_url", "https://api.soundcloud.com/tracks/239909324/stream"], ["duration", 211376], ["artwork_url", "https://i1.sndcdn.com/artworks-000141463732-4zdbym-large.jpg"], ["artist_id", 1], ["created_at", "2016-01-29 10:35:00.555889"], ["updated_at", "2016-01-29 10:35:00.555889"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tracks" ("title", "stream_url", "duration", "artwork_url", "artist_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "FACTS (EXPLICIT)"], ["stream_url", "https://api.soundcloud.com/tracks/239909100/stream"], ["duration", 211376], ["artwork_url", "https://i1.sndcdn.com/artworks-000141463569-lnlc1t-large.jpg"], ["artist_id", 1], ["created_at", "2016-01-29 10:35:00.558203"], ["updated_at", "2016-01-29 10:35:00.558203"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tracks" ("title", "stream_url", "duration", "artwork_url", "artist_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["title", "Say You Will (Ft. Caroline Shaw)"], ["stream_url", "https://api.soundcloud.com/tracks/226947742/stream"], ["duration", 285179], ["artwork_url", "https://i1.sndcdn.com/artworks-000131680895-d3r9xc-large.jpg"], ["artist_id", 1], ["created_at", "2016-01-29 10:35:00.560630"], ["updated_at", "2016-01-29 10:35:00.560630"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tracks" ("title", "stream_url", "duration", "artwork_url", "artist_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "When I See It"], ["stream_url", "https://api.soundcloud.com/tracks/226926811/stream"], ["duration", 103976], ["artwork_url", "https://i1.sndcdn.com/artworks-000132995690-vjfqxp-large.jpg"], ["artist_id", 1], ["created_at", "2016-01-29 10:35:00.563089"], ["updated_at", "2016-01-29 10:35:00.563089"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  Rendered artists/show.html.erb within layouts/application (1.6ms)
+  Rendered shared/_flashes.html.erb (0.4ms)
+  Rendered shared/_navbar.html.erb (1.2ms)
+Completed 200 OK in 2727ms (Views: 24.4ms | ActiveRecord: 8.9ms)
+
+
+Started GET "/tracks/3/download" for ::1 at 2016-01-29 11:35:05 +0100
+Processing by TracksController#download as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."id" = ? LIMIT 1[0m  [["id", 3]]
+  Rendered text template (0.0ms)
+Sent data  (4.9ms)
+Completed 200 OK in 8208ms (Views: 4.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/tracks/3/download" for ::1 at 2016-01-29 11:35:13 +0100
+Processing by TracksController#download as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mTrack Load (0.1ms)[0m  SELECT  "tracks".* FROM "tracks" WHERE "tracks"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered text template (0.0ms)
+Sent data  (0.5ms)
+Completed 200 OK in 7864ms (Views: 0.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for ::1 at 2016-01-29 11:43:11 +0100
+Processing by ArtistsController#search as HTML
+  Rendered artists/search.html.erb within layouts/application (1.0ms)
+  Rendered shared/_flashes.html.erb (0.1ms)
+  Rendered shared/_navbar.html.erb (1.1ms)
+Completed 200 OK in 36ms (Views: 35.9ms | ActiveRecord: 0.0ms)
